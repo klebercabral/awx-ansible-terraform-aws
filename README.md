@@ -1,6 +1,6 @@
 # awx-ansible-terraform-aws
 
-Projeto k8s na AWS provisionado com Terraform (VPC, SecurityGroup e EC2) e Ansible
+Projeto AWX na AWS provisionado com Terraform (VPC, SecurityGroup e EC2) e Ansible
 
 ## Requisitos
 

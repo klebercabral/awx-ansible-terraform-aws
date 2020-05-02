@@ -12,7 +12,6 @@
     pip_install_packages:
       - docker
       - docker-compose
-      - selinux
 
   pre_tasks:
     - name: Update apt cache.

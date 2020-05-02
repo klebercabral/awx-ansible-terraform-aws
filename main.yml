@@ -1,0 +1,30 @@
+- hosts: local
+  roles:
+  - { role: criando-instancias, tags: ["criando-instancias"] }
+
+- hosts: awx
+  become: yes
+  user: ubuntu
+  vars:
+    nodejs_version: "10.x"
+    pip_package: python3-pip
+    pip_executable: pip3
+    pip_install_packages:
+      - docker
+      - docker-compose
+      - selinux
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+
+  roles:
+
+    - geerlingguy.git
+    - geerlingguy.ansible
+    - geerlingguy.docker
+    - geerlingguy.pip
+    - geerlingguy.nodejs
+    - geerlingguy.awx

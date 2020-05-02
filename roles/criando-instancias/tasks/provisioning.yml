@@ -1,0 +1,16 @@
+- name: terraform
+  terraform:
+    project_path: './aws-terraform'
+    state: present
+    force_init: yes
+  register: tf_aws
+- name: awx instance
+  add_host:
+    name: '{{ tf_aws.outputs.public1.value }}'
+    groups: awx
+- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+  wait_for:
+    port: 22
+    host: '{{ tf_aws.outputs.public1.value }}'
+    delay: 10
+  connection: local
